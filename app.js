@@ -1,84 +1,17 @@
 var contador = 0;
 
 window.onload = function () {
-  console.log('What are we playing today?');
-  //FUNCION PARA NUMERO
-  let valor = document.querySelector('#center');
-  valor.appendChild(getnumber());
-
-  //FUNCION PARA PINTA
-  var pinta = document.querySelectorAll('.suit');
-  let selectorpinta = Math.floor(Math.random() * 4);
-
-  if (selectorpinta == 0 || selectorpinta == 1) {
-    document.querySelector('#center').style.color = 'red';
-    if (selectorpinta == 0) {
-      for (let i = 0; i < pinta.length; i++) {
-        pinta[i].innerHTML = '♥';
-        pinta[i].style.color = "red";
-      }
-    }
-    else {
-      for (let i = 0; i < pinta.length; i++) {
-        pinta[i].innerHTML = '♦';
-        pinta[i].style.color = 'red';
-      }
-    }
-  }
-  else if (selectorpinta == 2) {
-    for (let i = 0; i < pinta.length; i++) {
-      pinta[i].innerHTML = '♠';
-    }
-  }
-  else {
-    for (let i = 0; i < pinta.length; i++) {
-      pinta[i].innerHTML = '♣';
-    }
-  }
-
-  //BOTON NUEVA CARTA
-  var boton = document.getElementById("boton");
+  console.log('Sorting stuff out');
+  //BOTON GENERAR CARTAS
+  let boton = document.getElementById("draw");
+  let amount = document.getElementById("cards");
   boton.addEventListener('click', (e) => {
-    otracarta();
+    otracarta(amount.value);
+    amount.value = "";
   });
-
-  //CONTADOR 
-  var timmer = document.getElementById("start");
-  timmer.addEventListener('click', (e) => {
-    let interval = window.setInterval(otracarta, 10000);
-  });
-
-  var detener = document.getElementById("stop");
-  detener.addEventListener('click', (e) => {
-    clearInterval(interval);
-  });
-
-  //CAMBIO DE MEDIDAS CARTA
-  let ancho = document.getElementById("width");
-  let carta = document.getElementsByClassName("carta");
-  let alto = document.getElementById("height");
-
-  ancho.addEventListener('change', (e) => {
-    if (ancho.value != null) {
-      for(var i = 0; i < carta.length; i++){
-      carta[i].style.width = ancho.value + `px`;
-      }
-      ancho.value = "";
-    }
-  });
-  
-  alto.addEventListener('change', (e) => {
-    if (alto.value != null) {
-      for(var i = 0; i < carta.length; i++){
-      carta[i].style.height = alto.value + `px`;
-      }
-      alto.value = "";
-    }
-  });
-
-//FIN ONLOAD
 };
 
+//FUNCION QUE ENTREGA NUMERO
 function getnumber() {
   let number = Math.floor(Math.random() * 13 + 1);
   if (number == 13) {
@@ -102,56 +35,69 @@ function getnumber() {
     return text;
   }
 }
+//FUNCION QUE CREA CARTA
+function otracarta(num){
 
-function otracarta(){
-  contador++;
+  let cuerpo = document.querySelector('.row');
 
-  var cuerpo = document.querySelector('.row');
-  let nuevacarta = document.createElement("div");
-  nuevacarta.classList.add("carta", "col-6");
-  let top = document.createElement("div");
-  top.classList.add(`suit${contador}`);
-  top.setAttribute("id", "top");
-  nuevacarta.appendChild(top);
-  let mid = document.createElement("div");
-  mid.setAttribute("id", `center${contador}`);
-  nuevacarta.appendChild(mid);
-  let btm = document.createElement("div");
-  btm.classList.add(`suit${contador}`);
-  btm.setAttribute("id", "bottom");
-  nuevacarta.appendChild(btm);
-  cuerpo.appendChild(nuevacarta);
+  for (let i = 0; i < num; i++) {
 
-  //DAR NUMERO A LA CARTA NUEVA
-  var valor1 = document.getElementById(`center${contador}`);
-  valor1.appendChild(getnumber());
+    let nuevacarta = document.createElement("div");
+    nuevacarta.classList.add("carta", "col-3");
+    let top = document.createElement("div");
+    top.classList.add(`suit${contador}`);
+    top.setAttribute("id", "top");
+    nuevacarta.appendChild(top);
+    let mid = document.createElement("div");
+    mid.setAttribute("id", `center${contador}`);
+    nuevacarta.appendChild(mid);
+    let btm = document.createElement("div");
+    btm.classList.add(`suit${contador}`);
+    btm.setAttribute("id", "bottom");
+    nuevacarta.appendChild(btm);
+    cuerpo.appendChild(nuevacarta);
 
-  //DAR PINTA A LA CARTA NUEVA
-  var pinta = document.querySelectorAll(`.suit${contador}`);
-  let selectorpinta = Math.floor(Math.random() * 4);
-  if (selectorpinta == 0 || selectorpinta == 1) {
-    document.querySelector(`#center${contador}`).style.color = 'red';
-    if (selectorpinta == 0) {
-      for (var i = 0; i < pinta.length; i++) {
-        pinta[i].innerHTML = '♥';
-        pinta[i].style.color = "red";
+    //DAR NUMERO A LA CARTA NUEVA
+    var valor1 = document.getElementById(`center${contador}`);
+    valor1.appendChild(getnumber());
+
+    //DAR PINTA A LA CARTA NUEVA
+    var pinta = document.querySelectorAll(`.suit${contador}`);
+    let selectorpinta = Math.floor(Math.random() * 4);
+    if (selectorpinta == 0 || selectorpinta == 1) {
+      document.querySelector(`#center${contador}`).style.color = 'red';
+      if (selectorpinta == 0) {
+        for (let i = 0; i < pinta.length; i++) {
+          pinta[i].innerHTML = '♥';
+          pinta[i].style.color = "red";
+        }
+      }
+      else {
+        for (let i = 0; i < pinta.length; i++) {
+          pinta[i].innerHTML = '♦';
+          pinta[i].style.color = 'red';
+        }
+      }
+    }
+    else if (selectorpinta == 2) {
+      for (let i = 0; i < pinta.length; i++) {
+        pinta[i].innerHTML = '♠';
       }
     }
     else {
       for (let i = 0; i < pinta.length; i++) {
-        pinta[i].innerHTML = '♦';
-        pinta[i].style.color = 'red';
+        pinta[i].innerHTML = '♣';
       }
     }
+    contador++;
   }
-  else if (selectorpinta == 2) {
-    for (let i = 0; i < pinta.length; i++) {
-      pinta[i].innerHTML = '♠';
-    }
+  let arr = document.querySelectorAll(".carta");
+  for(let i = 0; i < arr.length; i++){
+  console.log(arr[i].childNodes[1].lastChild.nodeValue);
   }
-  else {
-    for (let i = 0; i < pinta.length; i++) {
-      pinta[i].innerHTML = '♣';
-    }
-  }
+  // if(arr[i].childNodes[1].lastChild.nodeValue > arr[i+1].childNodes[1].lastChild.nodeValue){
+  //   let aux = arr[i].childNodes[1].lastChild.nodeValue;
+  //   arr[i].childNodes[1].lastChild.nodeValue = arr[i+1].childNodes[1].lastChild.nodeValue;
+  //   arr[i+1].childNodes[1].lastChild.nodeValue = aux;
+  // }
 }

@@ -3,9 +3,10 @@ body {
 }
 
 .carta{
+    padding: 5px;
     margin: 20px auto;
-    height: 450px;
-    width: 300px;
+    height: 150px;
+    width: 100px;
     background: white;
     border-radius: 20px;
 }
@@ -17,14 +18,13 @@ body {
 
 #top, #bottom {
     height: 30%;
-    padding-left: 14px;
-    font-size: 6em;
+    font-size: 40px;
 }
 
 div[id^="center"] {
     height: 40%;
     text-align: center;
-    font-size: 8em;
+    font-size: 40px;
 }
 
 #bottom{
