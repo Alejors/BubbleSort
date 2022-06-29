@@ -147,7 +147,7 @@ function bubbleSort(arr) {
         }
 
         let linea = document.createElement("div");
-        linea.classList.add("row");
+        linea.classList.add("d-flex");
                
         let arrayParaHtml = [];
         for (let i = 0; i < array.length; i++) {
