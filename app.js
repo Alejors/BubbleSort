@@ -9,6 +9,10 @@ window.onload = function () {
     otracarta(amount.value);
     amount.value = "";
   });
+  let sorter = document.getElementById("sort");
+  sorter.addEventListener('click', (e) => {
+    bubbleSort();
+  });
 };
 
 //FUNCION QUE ENTREGA NUMERO
@@ -36,7 +40,7 @@ function getnumber() {
   }
 }
 //FUNCION QUE CREA CARTA
-function otracarta(num){
+function otracarta(num) {
 
   let cuerpo = document.querySelector('.row');
 
@@ -91,13 +95,63 @@ function otracarta(num){
     }
     contador++;
   }
+
+}
+
+function bubbleSort() {
   let arr = document.querySelectorAll(".carta");
-  for(let i = 0; i < arr.length; i++){
-  console.log(arr[i].childNodes[1].lastChild.nodeValue);
+  console.log(arr);
+  if (arr.length == 0) {
+    window.alert("No cards to sort!");
   }
-  // if(arr[i].childNodes[1].lastChild.nodeValue > arr[i+1].childNodes[1].lastChild.nodeValue){
-  //   let aux = arr[i].childNodes[1].lastChild.nodeValue;
-  //   arr[i].childNodes[1].lastChild.nodeValue = arr[i+1].childNodes[1].lastChild.nodeValue;
-  //   arr[i+1].childNodes[1].lastChild.nodeValue = aux;
-  // }
+  else {
+    let wall = arr.length-1;
+        
+    while (wall > 0) {
+      
+      for (let i = 0; i < wall; i++) {
+        let auxi = 0;
+        let auxj = 0;
+
+        if (arr[i].childNodes[1].lastChild.nodeValue === 'K') {
+          auxi = 13;
+        }
+        else if (arr[i].childNodes[1].lastChild.nodeValue === 'Q') {
+          auxi = 12;
+        }
+        else if (arr[i].childNodes[1].lastChild.nodeValue === 'J') {
+          auxi = 11;
+        }
+        else if (arr[i].childNodes[1].lastChild.nodeValue === 'A') {
+          auxi = 14;
+        }
+        else {
+          auxi = parseInt(arr[i].childNodes[1].lastChild.nodeValue);
+        }
+        
+        if (arr[i + 1].childNodes[1].lastChild.nodeValue == 'K') {
+          auxj = 13;
+        }
+        else if (arr[i + 1].childNodes[1].lastChild.nodeValue == 'Q') {
+          auxj = 12;
+        }
+        else if (arr[i + 1].childNodes[1].lastChild.nodeValue == 'J') {
+          auxj = 11;
+        }
+        else if (arr[i + 1].childNodes[1].lastChild.nodeValue == 'A') {
+          auxj = 14;
+        }
+        else {
+          auxj = parseInt(arr[i + 1].childNodes[1].lastChild.nodeValue);
+        }
+
+        if (auxi > auxj) {
+          let aux = arr[i].childNodes[1].lastChild.nodeValue;
+          arr[i].childNodes[1].lastChild.nodeValue = arr[i + 1].childNodes[1].lastChild.nodeValue;
+          arr[i + 1].childNodes[1].lastChild.nodeValue = aux;
+        }
+      }
+      wall--;
+    }
+  }
 }
