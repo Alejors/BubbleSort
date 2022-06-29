@@ -2,6 +2,10 @@ body {
     background: green;
 }
 
+h3{
+    margin: auto 0;
+}
+
 .carta{
     padding: 5px;
     margin: 20px auto;
