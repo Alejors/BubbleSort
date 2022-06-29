@@ -100,15 +100,15 @@ function otracarta(num) {
 
 function bubbleSort() {
   let arr = document.querySelectorAll(".carta");
-  console.log(arr);
+
   if (arr.length == 0) {
     window.alert("No cards to sort!");
   }
   else {
-    let wall = arr.length-1;
-        
+    let wall = arr.length - 1;
+
     while (wall > 0) {
-      
+
       for (let i = 0; i < wall; i++) {
         let auxi = 0;
         let auxj = 0;
@@ -128,7 +128,7 @@ function bubbleSort() {
         else {
           auxi = parseInt(arr[i].childNodes[1].lastChild.nodeValue);
         }
-        
+
         if (arr[i + 1].childNodes[1].lastChild.nodeValue == 'K') {
           auxj = 13;
         }
@@ -149,7 +149,16 @@ function bubbleSort() {
           let aux = arr[i].childNodes[1].lastChild.nodeValue;
           arr[i].childNodes[1].lastChild.nodeValue = arr[i + 1].childNodes[1].lastChild.nodeValue;
           arr[i + 1].childNodes[1].lastChild.nodeValue = aux;
+          let linea = document.createElement("div");
+          linea.classList.add("row");
+          let nuevoarray = [];
+          for(let k = 0; k < arr.length; k++){
+            nuevoarray.push(arr[k]);
+          }
+          console.log(nuevoarray);
+          document.querySelector(".container-flex").appendChild(linea);
         }
+
       }
       wall--;
     }
